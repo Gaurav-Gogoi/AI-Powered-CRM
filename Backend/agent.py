@@ -1,17 +1,17 @@
 import os
 import json
-from langchain_core.tools import tool
 from dotenv import load_dotenv
+from langchain_core.tools import tool
 from langchain_groq import ChatGroq
 from langgraph.prebuilt import create_react_agent
-from langgraph.checkpoint.memory import MemorySaver # 1. ADDED THIS IMPORT
+from langgraph.checkpoint.memory import MemorySaver 
 from database import SessionLocal, Interaction
 
-# PUT YOUR GROQ API KEY HERE 
+
 load_dotenv()
 
 
-# TOOL 1: Log Interaction (MANDATORY)
+# TOOL 1: Log Interaction 
 @tool
 def log_interaction(hcp_name: str, sentiment: str, notes: str, interaction_type: str = "Meeting"):
     """Use this to extract details when the user logs a new interaction."""
@@ -27,7 +27,8 @@ def log_interaction(hcp_name: str, sentiment: str, notes: str, interaction_type:
         "data": {"hcp_name": hcp_name, "sentiment": sentiment, "notes": notes, "interaction_type": interaction_type}
     })
 
-# TOOL 2: Edit Interaction (MANDATORY)
+# TOOL 2: Edit Interaction 
+# updates sepcific fields and tells frontend what to change
 @tool
 def edit_interaction(field: str, new_value: str):
     """Use this when the user corrects a mistake. field should be 'hcp_name', 'sentiment', or 'notes'."""
@@ -56,6 +57,7 @@ def schedule_follow_up(date: str):
     return f"Follow up scheduled for {date}."
 
 tools = [log_interaction, edit_interaction, search_hcp, get_product_info, schedule_follow_up]
+# this is the brain llm model
 llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
 
 # 2. ADDED MEMORY SAVER HERE

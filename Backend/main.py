@@ -50,7 +50,7 @@ async def chat(request: ChatRequest):
         }
 
     except Exception as e:
-        # 🚨 IF PYTHON CRASHES, IT WILL PRINT HERE AND SEND TO REACT 🚨
+    
         print("\n" + "="*50)
         print("💥 BACKEND CRASH DETECTED!")
         traceback.print_exc()
