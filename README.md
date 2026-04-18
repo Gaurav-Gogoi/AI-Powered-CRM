@@ -117,3 +117,6 @@ my-ai-crm/
     ├── tailwind.config.js
     └── package.json
 Created for the QMS/CRM Assignment Task 1.
+
+
+deplyed linked  check out - https://ai-powered-crm-dun.vercel.app/ 
