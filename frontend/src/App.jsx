@@ -25,7 +25,7 @@ function App() {
 
     try {
       // Send to FastAPI
-      const res = await axios.post('http://localhost:8000/api/chat', { message: chatInput });
+      const res = await axios.post('https://ai-powered-crm-1.onrender.com/api/chat', { message: chatInput });
       
       // Add AI reply to UI
       setMessages([...newMessages, { role: 'ai', text: res.data.reply || "Done!" }]);
